@@ -23,8 +23,30 @@ public class GameController : MonoBehaviour
     private Transform playerStartTransform;
 
     private PlayerController player;
+    private HudController hud;
 
-    private int PlayerPoints = 0;
+    private int _playerPoints;
+    public int PlayerPoints 
+    {
+        get { return _playerPoints; }
+        protected set 
+        {
+            _playerPoints = value;
+            GameEvents.OnChangePlayerPoints.Invoke(_playerPoints);
+        }
+    }
+
+    private float _levelTime;
+    public float LevelTime
+    {
+        get { return _levelTime; }
+        protected set
+        {
+            _levelTime = value;
+            GameEvents.OnChangeLevelTime.Invoke(_levelTime);
+        }
+    }
+
 
     private void Awake()
     {
@@ -39,6 +61,9 @@ public class GameController : MonoBehaviour
 
         GameEvents.OnEndLevel.AddListener(LevelEnd);
         GameEvents.OnCollectable.AddListener(OnCollect);
+
+        HudController hudPrefab = Resources.Load<HudController>("Prefabs/Canvas");
+        hud = Instantiate<HudController>(hudPrefab);
 
     }
 

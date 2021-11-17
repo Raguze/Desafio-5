@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private CharacterController characterController;
+    private Rigidbody rb;
 
     public float Horizontal { get; protected set; }
 
@@ -12,16 +12,16 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        characterController = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
         
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Horizontal = Input.GetAxis("Horizontal");
-
-        characterController.Move(new Vector3(Horizontal * Speed, 0, 0) * Time.deltaTime);
+        Vector3 velocity = rb.velocity;
+        rb.velocity  = new Vector3(Horizontal * Speed, velocity.y, 0);
 
     }
 }
