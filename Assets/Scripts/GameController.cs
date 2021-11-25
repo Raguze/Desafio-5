@@ -6,16 +6,19 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     /// <summary>
-    ///     Double Jump
-    ///     Dash
-    ///     Flutuar
-    ///     Wall Jump
+    ///     Player
+    ///         Jump
+    ///         Double Jump
+    ///         Wall Jump
+    ///         Flutuar
+    ///         Walk
+    ///         Run
+    ///         Dash
+    ///         Escalar parede
+    ///         Subir Escada (Megaman)
+    ///         Puxar/Empurrar
+    ///         Pendurar "cipó"
     ///     Sistema de Ranking (pontos, tempo)
-    ///     Run
-    ///     Puxar/Empurrar
-    ///     Pendurar "cipó"
-    ///     Escalar parede
-    ///     Subir Escada (Megaman)
     ///     Hud
     /// </summary>
 
@@ -81,7 +84,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        
+        PlayerPoints = 0;
     }
 
     // Update is called once per frame
