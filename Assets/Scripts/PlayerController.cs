@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour
     public float Speed = 10f;
     public float JumpSpeed = 10f;
 
+    #region RUN_DASH
+    
+    #endregion
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -48,6 +52,14 @@ public class PlayerController : MonoBehaviour
         Horizontal = Input.GetAxis("Horizontal");
         JumpInput = Input.GetKeyDown(KeyCode.Space);
         RunInput = Input.GetKey(KeyCode.LeftShift);
+        
+        // Dash
+        //KeyCode.LeftControl
+        
+        // Push Pull
+        //KeyCode.F
+        
+        
     }
 
     void ResetInputs()
