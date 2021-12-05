@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public float Horizontal { get; protected set; }
     public bool JumpInput { get; protected set; }
+    public bool FloatInput { get; protected set; }
     public bool RunInput { get; protected set; }
     public bool GrabInput { get; protected set; }
 
@@ -51,6 +52,7 @@ public class PlayerController : MonoBehaviour
     {
         Horizontal = Input.GetAxis("Horizontal");
         JumpInput = Input.GetKeyDown(KeyCode.Space);
+        FloatInput = Input.GetKey(KeyCode.Space);
         RunInput = Input.GetKey(KeyCode.LeftShift);
         
         // Dash
@@ -98,7 +100,10 @@ public class PlayerController : MonoBehaviour
 
     void Float()
     {
-
+        if(FloatInput)
+        {
+            if(CurrentVelocity.y < -1) CurrentVelocity = new Vector3(CurrentVelocity.x, -1, 0);
+        }
     }
 
     void Walk()
