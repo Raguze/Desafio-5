@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
 
     public float Speed = 10f;
     public float JumpSpeed = 10f;
+    public float climbingSpeed = 3f;
+    public LayerMask groundLayer;
 
     #region RUN_DASH
     
@@ -126,7 +128,20 @@ public class PlayerController : MonoBehaviour
 
     void WallClimb()
     {
-
+        if (Physics.Raycast(this.transform.position - new Vector3(0, 0.9f, 0), -this.transform.right, 0.6f) && Horizontal < 0)
+        {
+            rb.useGravity = false;
+            transform.position += Vector3.up * climbingSpeed * Time.deltaTime;
+        }
+        else if (Physics.Raycast(this.transform.position - new Vector3(0, 0.9f,0), this.transform.right, 0.6f) && Horizontal > 0)
+        {
+            rb.useGravity = false;
+            transform.position += Vector3.up * climbingSpeed * Time.deltaTime;
+        }
+        else
+        {
+            rb.useGravity = true;
+        }
     }
 
     void LadderClimb()
