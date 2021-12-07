@@ -19,6 +19,12 @@ public class PlayerController : MonoBehaviour
     public float climbingSpeed = 3f;
     public LayerMask groundLayer;
 
+    public float MovableBoxDetectorDistance = 0.75f;
+
+    public LayerMask MovableBoxMask;
+
+    GameObject MovableBox;
+
     #region RUN_DASH
     
     #endregion
@@ -26,7 +32,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        
+        MovableBoxMask = LayerMask.GetMask("Movable Box");
     }
 
     void Update()
@@ -61,7 +67,7 @@ public class PlayerController : MonoBehaviour
         //KeyCode.LeftControl
         
         // Push Pull
-        //KeyCode.F
+        GrabInput = Input.GetKeyDown(KeyCode.F);
         
         
     }
@@ -151,6 +157,34 @@ public class PlayerController : MonoBehaviour
 
     void PushPull()
     {
+        bool HitR = Physics.Raycast(transform.position,Vector2.right*transform.localScale.x,MovableBoxDetectorDistance, MovableBoxMask);
+        bool HitL = Physics.Raycast(transform.position,Vector2.right*transform.localScale.x*-1,MovableBoxDetectorDistance, MovableBoxMask);
+        if(HitL == false && HitR == false){
+            MovableBox = null;
+            Speed = 10f;
+        }
+        if (HitR && GrabInput || HitL && GrabInput){
+            Debug.Log("Puxei");
+            MovableBox.GetComponent<MeshRenderer>().material.color = Color.blue;
+            FixedJoint FJ = MovableBox.AddComponent<FixedJoint>();
+            FJ.connectedBody = this.rb;
+            FJ.breakForce = 50f;
+            Speed = 1.5f;
+        }
+        if(Input.GetKeyUp(KeyCode.F)){
+            MovableBox.GetComponent<MeshRenderer>().material.color = Color.white;
+            FixedJoint FJ = MovableBox.GetComponent<FixedJoint>();
+            Destroy(FJ);
+            
+            
+            Speed = 10f;
+        }
+    }
 
+    void OnCollisionEnter(Collision collisionInfo)
+    {
+        if(collisionInfo.gameObject.tag == "Movable Box"){
+            MovableBox = collisionInfo.gameObject;
+        }
     }
 }
