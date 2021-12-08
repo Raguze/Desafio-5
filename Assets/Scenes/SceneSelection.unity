@@ -507,7 +507,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 374592388}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -612,7 +612,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: PushPullLevel
 --- !u!222 &378842520
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -944,7 +944,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 895813320}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 130738833}
+        m_TargetAssemblyTypeName: SceneSelection, Assembly-CSharp
+        m_MethodName: level2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &895813320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1027,7 +1039,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 958943887}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -1144,7 +1156,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1007793085}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 130738833}
+        m_TargetAssemblyTypeName: SceneSelection, Assembly-CSharp
+        m_MethodName: level9_Nathy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1007793085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1265,7 +1289,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1021897451}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 130738833}
+        m_TargetAssemblyTypeName: SceneSelection, Assembly-CSharp
+        m_MethodName: fredScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1021897451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1374,7 +1410,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Level1
 --- !u!222 &1160809039
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1586,7 +1622,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Level3_Henn
 --- !u!222 &1345463230
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1665,7 +1701,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Fred_Scene
 --- !u!222 &1386589505
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1744,7 +1780,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Level9_Nathy
 --- !u!222 &1533656701
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2022,7 +2058,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1693690816}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 130738833}
+        m_TargetAssemblyTypeName: SceneSelection, Assembly-CSharp
+        m_MethodName: level3_Henn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1693690816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2131,7 +2179,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Level2
 --- !u!222 &1861137896
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2222,7 +2270,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1862319670}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 130738833}
+        m_TargetAssemblyTypeName: SceneSelection, Assembly-CSharp
+        m_MethodName: pushPullLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1862319670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2305,7 +2365,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951693497}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
