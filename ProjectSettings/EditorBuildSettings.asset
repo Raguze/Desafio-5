@@ -4,5 +4,26 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/SceneSelection.unity
+    guid: 3954ab5316f6dd54185c096286352a3c
+  - enabled: 1
+    path: Assets/Scenes/Fred_Scene_Wall_Jump.unity
+    guid: d08af3821c5e6da478ae2bde52933d07
+  - enabled: 1
+    path: Assets/Scenes/Level1 1.unity
+    guid: 39815706f2e5f3e45b910c21e24a9b54
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: 40b1a9d47d36a9e4bae85e2cf6acbfe2
+  - enabled: 1
+    path: Assets/Scenes/Level3_Henn.unity
+    guid: 0a130eae69ca2254c934200f17a116fc
+  - enabled: 1
+    path: Assets/Scenes/Level9_Nathy.unity
+    guid: c686d939eb3bf574d9da41245f40cd89
+  - enabled: 1
+    path: Assets/Scenes/PushPullLevel.unity
+    guid: 5a8bb2c78ca477d46b66dc22c408bf0c
   m_configObjects: {}
