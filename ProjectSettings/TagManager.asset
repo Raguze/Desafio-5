@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Movable Box
+  - Killer Plane
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Wall
   - Collectable
   - Movable Box
-  - 
+  - Killer Plane
   - 
   - 
   - 
