@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour
     ///         Escalar parede
     ///         Subir Escada (Megaman)
     ///         Puxar/Empurrar
-    ///         Pendurar "cipó"
+    ///         Pendurar "cipï¿½"
     ///     Sistema de Ranking (pontos, tempo)
     ///     Hud
     /// </summary>
@@ -73,7 +73,7 @@ public class GameController : MonoBehaviour
     private void LevelEnd()
     {
         Debug.Log("GameController LevelEnd");
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("SceneSelection");
     }
 
     private void OnCollect(int points)
