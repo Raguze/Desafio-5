@@ -175,7 +175,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   runSpeed: 10
-  JumpSpeed: 10
+  JumpSpeed: 6
+  DoubleJumpSpeed: 10
   climbingSpeed: 3
   dashSpeed: 50
   startDashTime: 0.15
@@ -184,6 +185,7 @@ MonoBehaviour:
   currentDashTime: 0
   direction: 0
   isDashing: 0
+  canDoubleJump: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -191,6 +193,7 @@ MonoBehaviour:
   MovableBoxMask:
     serializedVersion: 2
     m_Bits: 0
+  onTheGround: 0
 --- !u!1 &3524737425172110311
 GameObject:
   m_ObjectHideFlags: 0

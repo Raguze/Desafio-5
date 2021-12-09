@@ -17,7 +17,8 @@ public class PlayerController : MonoBehaviour
 
     public float Speed = 10f;
     public float runSpeed = 10f;
-    public float JumpSpeed = 10f;
+    public float JumpSpeed = 8f;
+    public float DoubleJumpSpeed = 10f;
     public float climbingSpeed = 3f;
     private float wallStickTime = 0.5f;
     private float timeToUnstick = 0.0f;
@@ -34,6 +35,10 @@ public class PlayerController : MonoBehaviour
     private float direction;
     [SerializeField]
     private bool isDashing;
+    [SerializeField]
+    private bool canDoubleJump;
+    [SerializeField]
+    private bool canJump;
     public LayerMask groundLayer;
 
     public float MovableBoxDetectorDistance = 0.75f;
@@ -48,6 +53,7 @@ public class PlayerController : MonoBehaviour
 
     #region COLLISION_INFO
     private bool lookingRight = true;
+    [SerializeField]
     private bool onTheGround = false;
     private bool collidingLeft = false;
     private bool collidingRight = false;
@@ -152,7 +158,9 @@ public class PlayerController : MonoBehaviour
             if(Physics.Raycast(origin + i*rayPos.x*Vector3.right, direction, length))
             {
                 if(CurrentVelocity.y <= 0)
+                {
                     onTheGround = true;
+                } 
                 else
                     collidingUp = true;
 
@@ -206,16 +214,23 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if(JumpInput && onTheGround)
-        {
-            onTheGround = false;
+        if(JumpInput && canJump)
+        {    
             CurrentVelocity = CurrentVelocity + Vector3.up * JumpSpeed;
+            canJump = false;
         }
     }
 
     void DoubleJump()
     {
-
+        if(CurrentVelocity.y < -1 && canDoubleJump)
+        {
+            if(JumpInput)
+            {
+                CurrentVelocity = CurrentVelocity + Vector3.up * DoubleJumpSpeed;
+                canDoubleJump = false;
+            }
+        }
     }
 
     void WallJump()
@@ -347,6 +362,11 @@ public class PlayerController : MonoBehaviour
         {
             LevelStartPoint startPoint = GameObject.FindObjectOfType<LevelStartPoint>();
             transform.position = startPoint.transform.position;
+        }
+        if(collisionInfo.gameObject.layer == 6)
+        {
+            canJump = true;
+            canDoubleJump = true;
         }
     }
 }

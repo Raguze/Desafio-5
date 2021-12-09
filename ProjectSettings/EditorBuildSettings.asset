@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Fred_Scene_Wall_Jump.unity
     guid: d08af3821c5e6da478ae2bde52933d07
   - enabled: 1
-    path: Assets/Scenes/Level1 1.unity
+    path: Assets/Scenes/Level1.unity
     guid: 39815706f2e5f3e45b910c21e24a9b54
   - enabled: 1
     path: Assets/Scenes/Level2.unity
