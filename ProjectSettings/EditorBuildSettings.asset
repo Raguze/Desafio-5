@@ -26,4 +26,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PushPullLevel.unity
     guid: 5a8bb2c78ca477d46b66dc22c408bf0c
+  - enabled: 1
+    path: Assets/Scenes/Julia_Jump_Double_Jump.unity
+    guid: 17308484497ae9b4a9f315df91303602
+  - enabled: 1
+    path: Assets/Scenes/Level4_Vinicius.unity
+    guid: b7bf42823b9c99c4380fc68182bed600
   m_configObjects: {}

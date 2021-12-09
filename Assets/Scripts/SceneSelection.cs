@@ -39,7 +39,7 @@ public class SceneSelection : MonoBehaviour
     }
     public void level1()
     {
-        SceneManager.LoadScene ("Level1 1");
+        SceneManager.LoadScene ("Level1");
     }
     public void level2()
     {
@@ -57,5 +57,12 @@ public class SceneSelection : MonoBehaviour
     {
         SceneManager.LoadScene ("PushPullLevel");
     }
-
+    public void julia_Jump()
+    {
+        SceneManager.LoadScene ("Julia_Jump_Double_Jump");
+    }
+    public void level4_Vinicius()
+    {
+        SceneManager.LoadScene ("Level4_Vinicius");
+    }
 }
