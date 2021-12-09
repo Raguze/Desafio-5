@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 117750298}
   - component: {fileID: 117750297}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: Level10_WelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,7 +205,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 117750298}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 130738833}
+        m_TargetAssemblyTypeName: SceneSelection, Assembly-CSharp
+        m_MethodName: level10_Wel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &117750298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,7 +519,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 374592388}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -533,7 +545,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Level10_Wel
 --- !u!222 &374592391
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1432,7 +1444,7 @@ GameObject:
   - component: {fileID: 1173392600}
   - component: {fileID: 1173392599}
   m_Layer: 5
-  m_Name: Level4_Vinicius
+  m_Name: Level4_ViniciusButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1868,7 +1880,7 @@ GameObject:
   - component: {fileID: 1625367429}
   - component: {fileID: 1625367428}
   m_Layer: 5
-  m_Name: Julia_Jump_Double_Jump
+  m_Name: Julia_Jump_Double_JumpButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

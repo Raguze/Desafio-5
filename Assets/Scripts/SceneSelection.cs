@@ -65,4 +65,8 @@ public class SceneSelection : MonoBehaviour
     {
         SceneManager.LoadScene ("Level4_Vinicius");
     }
+    public void level10_Wel()
+    {
+        SceneManager.LoadScene ("Level10_Wel");
+    }
 }
