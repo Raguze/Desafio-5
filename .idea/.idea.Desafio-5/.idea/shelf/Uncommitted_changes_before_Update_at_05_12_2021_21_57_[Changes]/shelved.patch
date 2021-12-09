@@ -1,0 +1,41 @@
+Index: Assets/Scripts/PlayerController.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System.Collections;\r\nusing System.Collections.Generic;\r\nusing UnityEngine;\r\n\r\npublic class PlayerController : MonoBehaviour\r\n{\r\n    private Rigidbody rb;\r\n\r\n    public Vector3 CurrentVelocity { get; protected set; }\r\n\r\n    public float Horizontal { get; protected set; }\r\n    public bool JumpInput { get; protected set; }\r\n    public bool RunInput { get; protected set; }\r\n    public bool GrabInput { get; protected set; }\r\n\r\n    public float Speed = 10f;\r\n    public float JumpSpeed = 10f;\r\n\r\n    #region RUN_DASH\r\n    \r\n    #endregion\r\n\r\n    private void Awake()\r\n    {\r\n        rb = GetComponent<Rigidbody>();\r\n        \r\n    }\r\n\r\n    void Update()\r\n    {\r\n        GetInputs();\r\n        GetRigidbodyInfo();\r\n\r\n        Jump();\r\n        DoubleJump();\r\n        WallJump();\r\n        Float();\r\n        Walk();\r\n        Run();\r\n        Dash();\r\n        WallClimb();\r\n        LadderClimb();\r\n        PushPull();\r\n\r\n        ApplyToRigidbody();\r\n\r\n        ResetInputs();\r\n    }\r\n\r\n    void GetInputs()\r\n    {\r\n        Horizontal = Input.GetAxis(\"Horizontal\");\r\n        JumpInput = Input.GetKeyDown(KeyCode.Space);\r\n        RunInput = Input.GetKey(KeyCode.LeftShift);\r\n        \r\n        // Dash\r\n        //KeyCode.LeftControl\r\n        \r\n        // Push Pull\r\n        //KeyCode.F\r\n        \r\n        \r\n    }\r\n\r\n    void ResetInputs()\r\n    {\r\n        //JumpInput = false;\r\n        //RunInput = false;\r\n    }\r\n\r\n    void GetRigidbodyInfo()\r\n    {\r\n        CurrentVelocity = rb.velocity;\r\n    }\r\n\r\n    void ApplyToRigidbody()\r\n    {\r\n        rb.velocity = CurrentVelocity;\r\n    }\r\n\r\n    void Jump()\r\n    {\r\n        if(JumpInput)\r\n        {\r\n            CurrentVelocity = CurrentVelocity + Vector3.up * JumpSpeed;\r\n        }\r\n    }\r\n\r\n    void DoubleJump()\r\n    {\r\n\r\n    }\r\n\r\n    void WallJump()\r\n    {\r\n\r\n    }\r\n\r\n    void Float()\r\n    {\r\n\r\n    }\r\n\r\n    void Walk()\r\n    {\r\n        CurrentVelocity = new Vector3(Horizontal * Speed, CurrentVelocity.y, 0);\r\n    }\r\n\r\n    void Run()\r\n    {\r\n        if(RunInput)\r\n        {\r\n            CurrentVelocity = CurrentVelocity + (Vector3.right * Horizontal * Speed);\r\n        }\r\n    }\r\n\r\n    void Dash()\r\n    {\r\n\r\n    }\r\n\r\n    void WallClimb()\r\n    {\r\n\r\n    }\r\n\r\n    void LadderClimb()\r\n    {\r\n\r\n    }\r\n\r\n    void PushPull()\r\n    {\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/Scripts/PlayerController.cs b/Assets/Scripts/PlayerController.cs
+--- a/Assets/Scripts/PlayerController.cs	(revision dd198cbce43c4cfd765f26746624091d86558ed4)
++++ b/Assets/Scripts/PlayerController.cs	(date 1638489029606)
+@@ -12,9 +12,11 @@
+     public bool JumpInput { get; protected set; }
+     public bool RunInput { get; protected set; }
+     public bool GrabInput { get; protected set; }
++    public bool DashInput { get; protected set; }
+ 
+     public float Speed = 10f;
+     public float JumpSpeed = 10f;
++    public float DashSpeed = 50f;
+ 
+     #region RUN_DASH
+     
+@@ -52,14 +54,12 @@
+         Horizontal = Input.GetAxis("Horizontal");
+         JumpInput = Input.GetKeyDown(KeyCode.Space);
+         RunInput = Input.GetKey(KeyCode.LeftShift);
+-        
+-        // Dash
+-        //KeyCode.LeftControl
+-        
++        DashInput = Input.GetKeyDown(KeyCode.LeftControl);
++
+         // Push Pull
+         //KeyCode.F
+-        
+-        
++
++
+     }
+ 
+     void ResetInputs()

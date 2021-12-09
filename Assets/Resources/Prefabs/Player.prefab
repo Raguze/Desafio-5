@@ -173,9 +173,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f92263962360c6409078e6cc6cd3a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FloatInput: 0
-  Speed: 5
+  Speed: 10
+  runSpeed: 10
   JumpSpeed: 10
+  climbingSpeed: 3
+  dashSpeed: 50
+  startDashTime: 0.15
+  dashCooldown: 3
+  nextDash: 0
+  currentDashTime: 0
+  direction: 0
+  isDashing: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  MovableBoxDetectorDistance: 0.75
+  MovableBoxMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &3524737425172110311
 GameObject:
   m_ObjectHideFlags: 0

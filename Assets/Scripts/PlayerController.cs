@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
-
+    
     public Vector3 CurrentVelocity { get; protected set; }
 
     public float Horizontal { get; protected set; }
@@ -13,10 +13,25 @@ public class PlayerController : MonoBehaviour
     public bool FloatInput { get; protected set; }
     public bool RunInput { get; protected set; }
     public bool GrabInput { get; protected set; }
+    public bool DashInput { get; protected set; }
 
     public float Speed = 10f;
+    public float runSpeed = 10f;
     public float JumpSpeed = 10f;
     public float climbingSpeed = 3f;
+    [SerializeField]
+    private float dashSpeed = 50f;
+    [SerializeField]
+    private float startDashTime = 0.15f;
+    [SerializeField]
+    private float dashCooldown = 3f;
+    [SerializeField]
+    private float nextDash;
+    public float currentDashTime;
+    [SerializeField]
+    private float direction;
+    [SerializeField]
+    private bool isDashing;
     public LayerMask groundLayer;
 
     public float MovableBoxDetectorDistance = 0.75f;
@@ -50,10 +65,10 @@ public class PlayerController : MonoBehaviour
         WallClimb();
         LadderClimb();
         PushPull();
-
         ApplyToRigidbody();
 
         ResetInputs();
+        
     }
 
     void GetInputs()
@@ -62,9 +77,7 @@ public class PlayerController : MonoBehaviour
         JumpInput = Input.GetKeyDown(KeyCode.Space);
         FloatInput = Input.GetKey(KeyCode.Space);
         RunInput = Input.GetKey(KeyCode.LeftShift);
-        
-        // Dash
-        //KeyCode.LeftControl
+        DashInput = Input.GetKeyDown(KeyCode.LeftControl);
         
         // Push Pull
         GrabInput = Input.GetKeyDown(KeyCode.F);
@@ -123,13 +136,35 @@ public class PlayerController : MonoBehaviour
     {
         if(RunInput)
         {
-            CurrentVelocity = CurrentVelocity + (Vector3.right * Horizontal * Speed);
+            CurrentVelocity = CurrentVelocity + (Vector3.right * Horizontal * runSpeed);
         }
     }
 
-    void Dash()
-    {
+    void Dash() {
 
+        if (Time.time > nextDash) {
+            if (DashInput) {
+                isDashing = true;
+                nextDash = Time.time + dashCooldown;
+                direction = Mathf.Sign(Horizontal);
+                StartCoroutine(EDash());
+            }    
+        }
+        
+
+        if (isDashing) {
+            CurrentVelocity = Vector3.right * direction * dashSpeed;
+        }
+    }
+    
+    IEnumerator EDash() {
+        currentDashTime = Time.time;
+        
+        while (Time.time < currentDashTime + startDashTime) {
+            yield return null;
+        }
+        
+        isDashing = false;
     }
 
     void WallClimb()
@@ -185,6 +220,12 @@ public class PlayerController : MonoBehaviour
     {
         if(collisionInfo.gameObject.tag == "Movable Box"){
             MovableBox = collisionInfo.gameObject;
+        }
+        
+        if (collisionInfo.gameObject.tag == "Killer Plane")
+        {
+            LevelStartPoint startPoint = GameObject.FindObjectOfType<LevelStartPoint>();
+            transform.position = startPoint.transform.position;
         }
     }
 }
