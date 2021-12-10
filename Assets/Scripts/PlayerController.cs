@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
-
+    
     public Vector3 CurrentVelocity { get; protected set; }
 
     public float Horizontal { get; protected set; }
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask MovableBoxMask;
 
     GameObject MovableBox;
-
+    
     #region RUN_DASH
     
     #endregion
@@ -69,7 +69,6 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         MovableBoxMask = LayerMask.GetMask("Movable Box");
-
         CalculateRayPos();
     }
 
@@ -357,8 +356,7 @@ public class PlayerController : MonoBehaviour
         if(collisionInfo.gameObject.tag == "Movable Box"){
             MovableBox = collisionInfo.gameObject;
         }
-        
-        if (collisionInfo.gameObject.tag == "Killer Plane")
+        if(collisionInfo.gameObject.tag == "Killer Plane")
         {
             LevelStartPoint startPoint = GameObject.FindObjectOfType<LevelStartPoint>();
             transform.position = startPoint.transform.position;

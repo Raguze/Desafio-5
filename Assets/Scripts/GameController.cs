@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -81,12 +82,12 @@ public class GameController : MonoBehaviour
         PlayerPoints += points;
         Debug.Log(PlayerPoints);
     }
-
+    
     void Start()
     {
         PlayerPoints = 0;
     }
-
+    
     // Update is called once per frame
     void Update()
     {
