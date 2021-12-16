@@ -30,19 +30,6 @@ public class HudController : MonoBehaviour
 
     void OnChangePlayerPoints(int points)
     {
-
-
         TextPlayerPoints.text = $"Player Points {points}";
-    }
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

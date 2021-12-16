@@ -68,7 +68,6 @@ public class GameController : MonoBehaviour
 
         HudController hudPrefab = Resources.Load<HudController>("Prefabs/Canvas");
         hud = Instantiate<HudController>(hudPrefab);
-
     }
 
     private void LevelEnd()

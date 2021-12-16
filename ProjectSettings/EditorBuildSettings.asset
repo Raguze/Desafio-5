@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level10_Wel.unity
     guid: a3cf678b83dabf2409b85a8f9504b106
+  - enabled: 1
+    path: Assets/Scenes/Level_Backes.unity
+    guid: 3cd2bfc2e60ca794ca0dcc2b2cb00c28
   m_configObjects: {}
