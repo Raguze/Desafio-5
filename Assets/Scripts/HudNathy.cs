@@ -5,21 +5,18 @@ using UnityEngine.UI;
 
 public class HudNathy : MonoBehaviour
 {
-    // Start is called before the first frame update
     float tempo;
-    public GameObject tempoHud;
+    public Text timeUI;
  
     void Start()
     {
-        tempo = 0;
-        
+        timeUI.text = "TEMPO: 0";
     }
 
-    // Update is called once per frame
     void Update()
     {
         tempo += Time.deltaTime;
-        tempoHud.GetComponent<Text>().text = Mathf.Floor(tempo).ToString();
-       
+
+        timeUI.text = $"TEMPO: {Mathf.Floor(tempo).ToString()}";
     }
 }

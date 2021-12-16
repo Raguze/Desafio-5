@@ -4,28 +4,30 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody rb;
+    private const float DASH_DURATION = 0.15f;
+
+    Rigidbody rb;
+    [SerializeField]
+    float JumpSpeed = 8f;
+    bool canDash = true;
     
     public Vector3 CurrentVelocity { get; protected set; }
 
     public float Horizontal { get; protected set; }
     public bool JumpInput { get; protected set; }
-    public bool FloatInput { get; protected set; }
     public bool RunInput { get; protected set; }
     public bool GrabInput { get; protected set; }
     public bool DashInput { get; protected set; }
 
     public float Speed = 10f;
     public float runSpeed = 10f;
-    public float JumpSpeed = 8f;
-    public float DoubleJumpSpeed = 10f;
     public float climbingSpeed = 3f;
     private float wallStickTime = 0.5f;
     private float timeToUnstick = 0.0f;
     [SerializeField]
     private float dashSpeed = 50f;
     [SerializeField]
-    private float startDashTime = 0.15f;
+    private float currentDashDuration = 0f;
     [SerializeField]
     private float dashCooldown = 3f;
     [SerializeField]
@@ -78,18 +80,12 @@ public class PlayerController : MonoBehaviour
         GetRigidbodyInfo();
         GetCollisionInfo();
 
-// Debug.Log(collidingRight + " " + onTheWall);
-
         Jump();
         DoubleJump();
         WallJump();
-        Float();
         Walk();
         Run();
         Dash();
-        WallClimb();
-        LadderClimb();
-        PushPull();
 
         ApplyToRigidbody();
 
@@ -102,7 +98,6 @@ public class PlayerController : MonoBehaviour
     {
         Horizontal = Input.GetAxis("Horizontal");
         JumpInput = Input.GetKeyDown(KeyCode.Space);
-        FloatInput = Input.GetKey(KeyCode.Space);
         RunInput = Input.GetKey(KeyCode.LeftShift);
         DashInput = Input.GetKeyDown(KeyCode.LeftControl);
         
@@ -117,9 +112,10 @@ public class PlayerController : MonoBehaviour
     }
 
     void GetCollisionInfo()
-    {       
-        if(Horizontal != 0)
+    {
+        if(Horizontal != 0) {
             lookingRight = Horizontal > 0;
+        }
 
         Vector3 direction = lookingRight ? Vector3.right : Vector3.left;
         Vector3 origin = this.transform.position + new Vector3(direction.x*rayPos.x , -rayPos.y); 
@@ -130,8 +126,6 @@ public class PlayerController : MonoBehaviour
         
         for(int i = 0; i < 3; i++)
         {
-            //Debug.DrawRay(origin + i*rayPos.y*Vector3.up, direction*length, Color.blue);
-
             if(Physics.Raycast(origin + i*rayPos.y*Vector3.up, direction, length))
             {
                 if(lookingRight)
@@ -152,8 +146,6 @@ public class PlayerController : MonoBehaviour
 
         for(int i = 0; i < 3; i++)
         {
-            //Debug.DrawRay(origin + i*rayPos.x*Vector3.right, direction * length, Color.red);
-
             if(Physics.Raycast(origin + i*rayPos.x*Vector3.right, direction, length))
             {
                 if(CurrentVelocity.y <= 0)
@@ -217,18 +209,16 @@ public class PlayerController : MonoBehaviour
         {    
             CurrentVelocity = CurrentVelocity + Vector3.up * JumpSpeed;
             canJump = false;
+            canDoubleJump = true;
         }
     }
 
     void DoubleJump()
     {
-        if(CurrentVelocity.y < -1 && canDoubleJump)
+        if(CurrentVelocity.y < 0 && canDoubleJump && JumpInput)
         {
-            if(JumpInput)
-            {
-                CurrentVelocity = CurrentVelocity + Vector3.up * DoubleJumpSpeed;
-                canDoubleJump = false;
-            }
+            CurrentVelocity = CurrentVelocity + Vector3.up * JumpSpeed;
+            canDoubleJump = false;
         }
     }
 
@@ -237,34 +227,28 @@ public class PlayerController : MonoBehaviour
 
         if(JumpInput && onTheWall)
         {
-            if(Horizontal != 0)
-            {
-                CurrentVelocity = CurrentVelocity + Vector3.up * JumpSpeed;
-                timeToUnstick = 0.0f;
-                onTheWall = false;
+            Vector3 direction = new Vector3(0, 0, 0);
+
+            if (collidingLeft) {
+                direction = new Vector3(1 * Speed, CurrentVelocity.y, 0);
+            } else {
+                direction = new Vector3(-1 * Speed, CurrentVelocity.y, 0);
             }
 
-            if(Horizontal == 0)
-            {
-                CurrentVelocity = CurrentVelocity + Vector3.up * JumpSpeed*0.5f;
-                timeToUnstick = 0.0f;
-                onTheWall = false;
-            }
-
-        }
-    }
-
-    void Float()
-    {
-        if(FloatInput)
-        {
-            if(CurrentVelocity.y < -1) CurrentVelocity = new Vector3(CurrentVelocity.x, -1, 0);
+            CurrentVelocity = CurrentVelocity + Vector3.up * (JumpSpeed * 0.2f) + direction;
+            timeToUnstick = 0.0f;
+            onTheWall = false;
         }
     }
 
     void Walk()
     {
-        CurrentVelocity = new Vector3(Horizontal * Speed, CurrentVelocity.y, 0);
+        if (!onTheWall) {
+            if (Horizontal > 0) gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            if (Horizontal < 0) gameObject.transform.rotation = Quaternion.Euler(0, 0, 180f);
+
+            CurrentVelocity = new Vector3(Horizontal * Speed, CurrentVelocity.y, 0);
+        }
     }
 
     void Run()
@@ -276,79 +260,26 @@ public class PlayerController : MonoBehaviour
     }
 
     void Dash() {
-
-        if (Time.time > nextDash) {
-            if (DashInput) {
-                isDashing = true;
-                nextDash = Time.time + dashCooldown;
-                direction = Mathf.Sign(Horizontal);
-                StartCoroutine(EDash());
-            }    
+        if (DashInput && canDash) {
+            currentDashDuration = DASH_DURATION;
+            canDash = false;
+            isDashing = true;
+            nextDash = Time.time + dashCooldown;
+            direction = this.lookingRight ? 1f : -1f;
+            StartCoroutine(EDash());
         }
-        
 
-        if (isDashing) {
+
+        if (currentDashDuration > 0) {
             CurrentVelocity = Vector3.right * direction * dashSpeed;
+            currentDashDuration -= Time.deltaTime;
         }
     }
     
     IEnumerator EDash() {
-        currentDashTime = Time.time;
-        
-        while (Time.time < currentDashTime + startDashTime) {
-            yield return null;
-        }
-        
-        isDashing = false;
-    }
+        yield return new WaitForSeconds(dashCooldown);
 
-    void WallClimb()
-    {
-        if (Physics.Raycast(this.transform.position - new Vector3(0, 0.9f, 0), -this.transform.right, 0.6f) && Horizontal < 0)
-        {
-            rb.useGravity = false;
-            transform.position += Vector3.up * climbingSpeed * Time.deltaTime;
-        }
-        else if (Physics.Raycast(this.transform.position - new Vector3(0, 0.9f,0), this.transform.right, 0.6f) && Horizontal > 0)
-        {
-            rb.useGravity = false;
-            transform.position += Vector3.up * climbingSpeed * Time.deltaTime;
-        }
-        else
-        {
-            rb.useGravity = true;
-        }
-    }
-
-    void LadderClimb()
-    {
-
-    }
-
-    void PushPull()
-    {
-        bool HitR = Physics.Raycast(transform.position,Vector2.right*transform.localScale.x,MovableBoxDetectorDistance, MovableBoxMask);
-        bool HitL = Physics.Raycast(transform.position,Vector2.right*transform.localScale.x*-1,MovableBoxDetectorDistance, MovableBoxMask);
-        if(HitL == false && HitR == false){
-            MovableBox = null;
-            Speed = 10f;
-        }
-        if (HitR && GrabInput || HitL && GrabInput){
-            Debug.Log("Puxei");
-            MovableBox.GetComponent<MeshRenderer>().material.color = Color.blue;
-            FixedJoint FJ = MovableBox.AddComponent<FixedJoint>();
-            FJ.connectedBody = this.rb;
-            FJ.breakForce = 50f;
-            Speed = 1.5f;
-        }
-        if(Input.GetKeyUp(KeyCode.F)){
-            MovableBox.GetComponent<MeshRenderer>().material.color = Color.white;
-            FixedJoint FJ = MovableBox.GetComponent<FixedJoint>();
-            Destroy(FJ);
-            
-            
-            Speed = 10f;
-        }
+        canDash = true;
     }
 
     void OnCollisionEnter(Collision collisionInfo)
@@ -361,10 +292,11 @@ public class PlayerController : MonoBehaviour
             LevelStartPoint startPoint = GameObject.FindObjectOfType<LevelStartPoint>();
             transform.position = startPoint.transform.position;
         }
+        Debug.Log(collisionInfo.gameObject.tag);
         if(collisionInfo.gameObject.layer == 6)
         {
             canJump = true;
-            canDoubleJump = true;
+            canDoubleJump = false;
         }
     }
 }
