@@ -173,10 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f92263962360c6409078e6cc6cd3a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  JumpSpeed: 8
   Speed: 10
   runSpeed: 10
-  JumpSpeed: 6
-  DoubleJumpSpeed: 10
   climbingSpeed: 3
   dashSpeed: 50
   startDashTime: 0.15
@@ -186,6 +185,7 @@ MonoBehaviour:
   direction: 0
   isDashing: 0
   canDoubleJump: 0
+  canJump: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
